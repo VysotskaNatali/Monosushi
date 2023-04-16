@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AboutComponent } from './about.component';
-import { ICategoryResponse } from '../../shared/interfaces/category/category.interface';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;

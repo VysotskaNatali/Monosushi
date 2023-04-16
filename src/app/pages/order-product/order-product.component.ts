@@ -18,6 +18,8 @@ export class OrderProductComponent implements OnInit {
   public userForm!: FormGroup;
   public total = 0;
   public countBasket = 0;
+  public user!: any;
+  public countOrder = 1;
 
   //----------google map-----//
 
@@ -97,7 +99,8 @@ export class OrderProductComponent implements OnInit {
     this.initUserForm();
     this.userData();
     this.updateUser();
-    this.initOrderInfoForm();
+    this.initOrderForm();
+    this.countLenghtOrder();
   }
 
   loadBasket(): void {
@@ -146,9 +149,7 @@ export class OrderProductComponent implements OnInit {
     }
   }
 
-  //------------------------------
-
-  initOrderInfoForm(): void {
+  initOrderForm(): void {
     this.orderInfoForm = this.fb.group({
       holders: [null, [Validators.required]],
       countHolders: [null, [Validators.required]],
@@ -157,6 +158,7 @@ export class OrderProductComponent implements OnInit {
       callBack: false,
     });
   }
+
   initUserForm(): void {
     this.userForm = this.fb.group({
       firstN: [null, [Validators.required, Validators.minLength(2)]],
@@ -165,20 +167,48 @@ export class OrderProductComponent implements OnInit {
       address: [null, [Validators.required]],
     });
   }
+
   orderProduct() {
     if (this.basketArray.length > 0) {
-      console.log(this.basketArray, this.orderInfoForm.value);
-      this.basketArray = [];
-      localStorage.setItem('basket', JSON.stringify(this.basketArray));
-      this.updateBasket();
-      this.orderService.changeBasket.next(true);
-      localStorage.removeItem('basket');
-      this.orderInfoForm.reset();
-      this.router.navigate(['/cabinet/orderHistory']);
+      this.user = JSON.parse(localStorage.getItem('currentUser') as string);
+      const { phone, address } = this.userForm.value;
+      const user = {
+        address: address,
+        email: this.user.email,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        phoneNumber: phone,
+        role: 'USER',
+      };
+      this.accountService.updateUserFirebase(user, this.user.uid);
+
+      const { holders, countHolders, delivery, cash, callBack } =
+        this.orderInfoForm.value;
+
+      const orderData = {
+        holders: holders,
+        countHolders: countHolders,
+        cash: cash,
+        delivery: delivery,
+        callBack: callBack,
+        userUID: this.user.uid,
+        user: this.user.firstName +' '+ this.user.lastName,
+        phone:this.user.phoneNumber,
+        orderProduct: JSON.stringify(this.basketArray) as any,
+        data: String(new Date()),
+        total: this.total,
+        status: ' впроцесі',
+        address: address,
+        orderCount: this.countOrder + 1,
+       
+      };
+      this.orderService.createFirebase(orderData);
+      this.clearBasket();
     } else {
       this.router.navigate(['/home']);
     }
   }
+
   userData(): void {
     if (localStorage.length > 0 && localStorage.getItem('currentUser')) {
       const { firstName, lastName, email, phoneNumber, address } = JSON.parse(
@@ -192,10 +222,27 @@ export class OrderProductComponent implements OnInit {
       });
     }
   }
+
   updateUser(): void {
     this.accountService.userData$.subscribe(() => {
       this.userData();
     });
+  }
+
+  countLenghtOrder(): void {
+    this.orderService.getAllFirebase().subscribe((data) => {
+      this.countOrder = data.length;
+    });
+  }
+
+  clearBasket(): void {
+    this.basketArray = [];
+    localStorage.setItem('basket', JSON.stringify(this.basketArray));
+    this.updateBasket();
+    this.orderService.changeBasket.next(true);
+    localStorage.removeItem('basket');
+    this.orderInfoForm.reset();
+    this.router.navigate(['/cabinet/orderHistory']);
   }
 
   //-------------google maps---------

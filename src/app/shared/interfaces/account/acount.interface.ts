@@ -7,8 +7,5 @@ export interface IUser {
   email:string;
   firstName:string;
   lastName:string;
-  orders:Array<any>;
-  infoOrder:Array<any>;
   phoneNumber:string;
-
 }

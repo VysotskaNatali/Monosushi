@@ -10,6 +10,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatMenuModule} from '@angular/material/menu';
 
 const MATERIAL = [
   MatDialogModule,
@@ -22,6 +23,7 @@ const MATERIAL = [
   MatCheckboxModule,
   MatSelectModule,
   MatRadioModule,
+  MatMenuModule
 ];
 
 import { ReactiveFormsModule } from '@angular/forms';

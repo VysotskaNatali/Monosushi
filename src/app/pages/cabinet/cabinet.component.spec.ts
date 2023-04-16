@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CabinetComponent } from './cabinet.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 
 describe('CabinetComponent', () => {
@@ -13,7 +12,7 @@ describe('CabinetComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CabinetComponent],
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [RouterTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CabinetComponent);

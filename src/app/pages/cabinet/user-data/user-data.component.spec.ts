@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserDataComponent } from './user-data.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NO_ERRORS_SCHEMA } from '@angular/compiler';
+import { Firestore } from "@angular/fire/firestore";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { ToastrService } from 'ngx-toastr';
 
 describe('UserDataComponent', () => {
   let component: UserDataComponent;
@@ -13,8 +15,13 @@ describe('UserDataComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ UserDataComponent ],
       imports: [
-        HttpClientTestingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatDialogModule
+      ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: Firestore, useValue: {} },
+        { provide: ToastrService, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })

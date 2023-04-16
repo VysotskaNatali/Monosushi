@@ -45,26 +45,12 @@ describe('BasketDialogComponent', () => {
   });
 
   it('it should change total', () => {
-    const FAKE_BASKET: IProductResponse[] = [
-      {
-        id: 1,
-        category: { id: 1, name: 'qqq', path: 'qqq', imagePath: 'iqq' },
-        name: 'qqq',
-        path: 'qqq',
-        description: 'qqq',
-        weight: 10,
-        price: 10,
-        imagePath: 'qqq',
-        count: 1,
-      },
-    ];
-    component.basketArray = FAKE_BASKET;
+   
     spyOn(component, 'getTotalPrice').and.callThrough();
     component.getTotalPrice();
 
     expect(component.getTotalPrice).toHaveBeenCalled();
     expect(component.total).toBe(10);
-    component.basketArray = [];
     component.getTotalPrice();
     expect(component.getTotalPrice).toHaveBeenCalled();
     expect(component.total).toBe(0);

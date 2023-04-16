@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PhoneDataDialogComponent } from './phone-data-dialog.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -14,7 +13,6 @@ describe('PhoneDataDialogComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PhoneDataDialogComponent],
       imports: [
-        HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
         MatDialogModule,

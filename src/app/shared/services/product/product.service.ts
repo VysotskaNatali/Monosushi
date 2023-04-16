@@ -18,8 +18,6 @@ import {
   deleteDoc,
   DocumentData,
 } from '@firebase/firestore';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import {
   IProductRequest,
   IProductResponse,
@@ -29,8 +27,7 @@ import {
   providedIn: 'root',
 })
 export class ProductService {
-  private url = environment.BACKEND_URL;
-  private api = { products: `${this.url}/products` };
+ 
   private productCollection!: CollectionReference<DocumentData>;
 
   constructor(private http: HttpClient, private afs: Firestore) {

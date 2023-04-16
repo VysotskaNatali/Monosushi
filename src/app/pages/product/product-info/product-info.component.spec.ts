@@ -2,10 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductInfoComponent } from './product-info.component';
 import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ProductService} from "../../../shared/services/product/product.service";
-import {OrderService} from "../../../shared/services/order/order.service";
-import {CategoryService} from "../../../shared/services/category/category.service";
 
 
 xdescribe('ProductInfoComponent', () => {
@@ -17,7 +13,6 @@ xdescribe('ProductInfoComponent', () => {
       declarations: [ ProductInfoComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
       ]
     }).compileComponents();
 

@@ -1,0 +1,34 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/base";
+@import "../../shared/styles/mixins/media";
+
+.table {
+  margin-top: 50px 0;
+  width: 95%;
+  border-bottom: 2px solid $lighterBorder;
+  @include respond(tablet) {
+    font-size: 15px;
+  }
+  @include respond(mobile) {
+    width: 99%;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  &__header{
+    background-color: $mainCol;
+  }
+}
+th,
+td {
+  border-bottom: 2px solid $lighterBorder;
+  padding: 20px 30px;
+  color: $darkText;
+
+  @include respond(mobile) {
+    padding: 5px;
+  }
+}
+
+button.mat-menu-item.product {
+  width: 350px!important;
+}

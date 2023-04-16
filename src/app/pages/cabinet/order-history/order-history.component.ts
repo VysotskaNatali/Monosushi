@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IOrderData } from 'src/app/shared/interfaces/order/order.interface';
+import { OrderService } from 'src/app/shared/services/order/order.service';
 
 @Component({
   selector: 'app-order-history',
@@ -6,28 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-history.component.scss'],
 })
 export class OrderHistoryComponent implements OnInit {
-  public table = [
-    {
-      num: 441,
-      data: '25.12.2022',
-      address: 'вул. Городоцька 82',
-      sum: '232 грн',
-      status: true,
-      product: 'Філадельфія з лососем',
-      count: '1',
-    },
-    {
-      num: 158,
-      data: '02.02.2023',
-      address: 'вул. Городоцька 82',
-      sum: '950 грн',
-      status: false,
-      product: 'Сет Філадельфія',
-      count: '1',
-    },
-  ];
+  public orderData: Array<IOrderData> = [];
+  public user!: string;
+  public id!: string;
 
-  constructor() {}
+  constructor(private orderService: OrderService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadOrder();
+  }
+
+  async loadOrder() {
+    this.orderService.getAllFirebase().subscribe((data) => {
+      const user = JSON.parse(localStorage.getItem('currentUser') as string);
+      this.user = user?.uid;
+      data.forEach((date) => {
+        const arr = date.orderProduct;
+        date.orderProduct = JSON.parse(arr);
+        this.orderData = data as IOrderData[];
+      });
+    });
+  }
 }

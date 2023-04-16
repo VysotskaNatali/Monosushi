@@ -24,13 +24,7 @@ export class UserDataComponent implements OnInit {
     private afs: Firestore,
     private toastr: ToastrService,
     private auth: Auth,
-    ) {
-      // this.userInfoSubscription = this.accountService.isUserUpdate$ .subscribe(
-      //   () => {
-      //     this.updateUserData();
-      //     this.toastr.info('user data update');
-      //   });
-     }
+    ) {}
 
   ngOnInit(): void {
     this.inituserForm();
@@ -74,8 +68,6 @@ export class UserDataComponent implements OnInit {
       firstName:firstN,
       lastName:lastN,
       phoneNumber:phone,
-      orders: [],
-      infoOrder:[],
       role: 'USER',
     }
    this.accountService.updateUserFirebase(user,this.user.uid)

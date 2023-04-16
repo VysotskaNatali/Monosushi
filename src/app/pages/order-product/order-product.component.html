@@ -71,7 +71,7 @@
     <div class="form-group-half">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>*Ваше І'мя</mat-label>
-            <input formControlName="firstN"
+            <input formControlName="firstN" readonly
                 matInput type="text">
         </mat-form-field>
     </div>
@@ -79,7 +79,7 @@
     <div class="form-group-half">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>*Ваша фамілія</mat-label>
-            <input formControlName="lastN"
+            <input formControlName="lastN" readonly
                 matInput type="text">
         </mat-form-field>
     </div>
@@ -118,7 +118,7 @@
     <div class="form-group-half">
         <mat-form-field appearance="outline" color="primary">
             <mat-label>*Кількість приборів</mat-label>
-            <input formControlName="countHolders"
+            <input formControlName="countHolders" min="0"
                 matInput type="number">
         </mat-form-field>
     </div>
@@ -137,9 +137,9 @@
         <mat-form-field appearance="outline">
             <mat-label>Оберіть спосіб доставки</mat-label>
             <mat-select formControlName="delivery">
-                <mat-option value="Delivery">Доставка за адресою
+                <mat-option value="Доставка за адресою">Доставка за адресою
                 </mat-option>
-                <mat-option value="Pickup">Самовивіз</mat-option>
+                <mat-option value="Самовивіз">Самовивіз</mat-option>
             </mat-select>
         </mat-form-field></div>
     <div class="form-group">

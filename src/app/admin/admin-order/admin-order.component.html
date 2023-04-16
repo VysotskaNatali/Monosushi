@@ -1,1 +1,69 @@
-<p>admin-order works!</p>
+<table class="table">
+    <thead>
+        <tr class="table__header">
+            <th>Замовлення</th>
+            <th>Сума</th>
+            <th>Дії</th>
+
+        </tr>
+    </thead>
+    <tbody *ngFor="let order of orderData">
+        <tr *ngIf="order.status === ' впроцесі'">
+            <th class="orderCount">
+                <button mat-icon-button color="accent"
+                    [matMenuTriggerFor]="menuOrder">№ {{order.orderCount}}
+                    <mat-icon>more_vert</mat-icon></button>
+
+                <mat-menu #menuOrder="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="user">Замовник</button>
+                    <button mat-menu-item [matMenuTriggerFor]="address">Адреса</button>
+                    <button mat-menu-item [matMenuTriggerFor]="phone">Телефон</button>
+                    <button mat-menu-item [matMenuTriggerFor]="product">Продукт</button>
+                    <button mat-menu-item [matMenuTriggerFor]="holders">Прибори</button>
+                    <button mat-menu-item [matMenuTriggerFor]="cash">Оплата</button>
+                    <button mat-menu-item [matMenuTriggerFor]="callBack">callBack</button>
+                    <button mat-menu-item [matMenuTriggerFor]="delivery">Доставка</button>
+                </mat-menu>
+
+                <mat-menu #user="matMenu">
+                    <button mat-menu-item>{{order.user}}</button>
+                </mat-menu>
+                <mat-menu #address="matMenu">
+                    <button mat-menu-item>{{order.address}}</button>
+                </mat-menu>
+                <mat-menu #phone="matMenu">
+                    <button mat-menu-item>{{order.phone}}</button>
+                </mat-menu>
+
+                <mat-menu #product="matMenu">
+                    <button mat-menu-item class="product"
+                        *ngFor="let prod of order.orderProduct">
+                        <mat-grid-list cols="4">
+                            <mat-grid-tile colspan="3">{{prod.name |
+                                slice:0:25}}</mat-grid-tile>
+                            <mat-grid-tile>{{prod.count}} шт</mat-grid-tile>
+                        </mat-grid-list></button>
+                </mat-menu>
+                <mat-menu #holders="matMenu">
+                    <button mat-menu-item>{{order.holders}}</button>
+                </mat-menu>
+                <mat-menu #cash="matMenu">
+                    <button mat-menu-item>{{order.cash}}</button>
+                </mat-menu>
+                <mat-menu #callBack="matMenu">
+                    <button mat-menu-item>{{order.callBack? 'так':' ні'}}</button>
+                </mat-menu>
+                <mat-menu #delivery="matMenu">
+                    <button mat-menu-item>{{order.delivery}}</button>
+                </mat-menu>
+            </th>
+            <th>{{order.total}} грн</th>
+            <th width="50px">
+                <button class="tablet" mat-button color="primary"
+                    (click)="orderUpdate(order)">Підтвердити </button>
+                <button class="tablet" mat-button
+                    color="warn"(click)="orderDelete(order)">Видалити </button>
+            </th>
+        </tr>
+    </tbody>
+</table>
