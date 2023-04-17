@@ -1,6 +1,6 @@
 export const environment = {
   firebase: {
-    apiKey: "******************************",
+    apiKey: "***********************",
     authDomain: "mono-sushi-40aba.firebaseapp.com",
     projectId: "mono-sushi-40aba",
     storageBucket: "mono-sushi-40aba.appspot.com",

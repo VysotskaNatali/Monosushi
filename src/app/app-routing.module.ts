@@ -48,6 +48,11 @@ const routes: Routes = [
       import('./pages/offerta/offerta.module').then((m) => m.OffertaModule),
   },
   {
+    path: 'ordersProduct',
+    loadChildren: () =>
+      import('./pages/order-product/order-product.module').then((m) => m.OrderProductModule),
+  },
+  {
     path: 'action',
     loadChildren: () =>
       import('./pages/discount/discount.module').then((m) => m.DiscountModule),
@@ -56,8 +61,7 @@ const routes: Routes = [
     path: 'product/:category',
     loadChildren: () =>
       import('./pages/product/product.module').then((m) => m.ProductModule),
-  },
-  { path: 'ordersProduct', component: OrderProductComponent },
+  }
 ];
 
 @NgModule({

@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "la-ua-7edfa"
-  }
+    "default": "mono-sushi-40aba",
+    "***********************": "mono-sushi-40aba"
+  },
+  "targets": {},
+  "etags": {}
 }
